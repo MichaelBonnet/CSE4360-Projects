@@ -1,0 +1,7 @@
+1) Add drift adjustments
+2) Test with unfindable paths
+3) Test with different kinds of paths
+4) Figure out actual definition of axle_track
+5) Rewrite implementation.py to have origin at bottom left corner rather than top left
+6) Generally rewrite implementation.py
+7) Ask Dr. Huber if using DriveBase is okay for motor control

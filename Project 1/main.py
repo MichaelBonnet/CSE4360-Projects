@@ -53,15 +53,7 @@ draw_grid(grid_columns, grid_rows, grid_obstacles, found_path)
 ### PATH ACTUALIZATION ###
 ##########################
 
-# eep for start of program
-ev3.speaker.beep(300, 0.1)
-wait(300)
-ev3.speaker.beep(300, 0.1)
-wait(300)
-ev3.speaker.beep(300, 0.1)
-wait(300)
-ev3.speaker.beep(600, 0.1)
-wait(300)
+ev3.speaker.beep(1000)
 
 # Instructions:
 # 1 = go forward
@@ -75,15 +67,7 @@ for instruction in instructions:
         robot.straight(-305)
     elif instruction == 3:
         robot.turn(left_90)
-        ev3.speaker.beep(500)
-        ev3.speaker.beep(500)
     elif instruction == 4:
         robot.turn(right_90)
-        ev3.speaker.beep(750)
-        ev3.speaker.beep(750)
 
 ev3.speaker.beep(1000)
-# robot.turn(90)
-# robot.turn(-90)
-# robot.turn(90)
-

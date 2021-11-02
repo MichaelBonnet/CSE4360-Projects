@@ -40,20 +40,20 @@ right_motor = Motor(Port.C)
 movement_speed = total_degrees_per_foot
 movement_time  = 1350
 
-turning_speed = movement_speed/2
-turning_time  = 875
+turning_speed  = movement_speed/2
+turning_time   = 875
 
 #########################
 ### CONTROL FUNCTIONS ###
 #########################
 
 def turn_right():
-    left_motor.run_time(  -turning_speed, turning_time,   Stop.HOLD, False)
-    right_motor.run_time(  turning_speed, turning_time,   Stop.HOLD, True)
+    left_motor.run_time(  -turning_speed,  turning_time,  Stop.HOLD, False)
+    right_motor.run_time(  turning_speed,  turning_time,  Stop.HOLD, True)
 
 def turn_left():
-    left_motor.run_time(   turning_speed, turning_time,   Stop.HOLD, False)
-    right_motor.run_time( -turning_speed, turning_time,   Stop.HOLD, True)
+    left_motor.run_time(   turning_speed,  turning_time,  Stop.HOLD, False)
+    right_motor.run_time( -turning_speed,  turning_time,  Stop.HOLD, True)
 
 def move_forward():
     left_motor.run_time(   movement_speed, movement_time, Stop.HOLD, False)
@@ -63,27 +63,26 @@ def move_backward():
     left_motor.run_time(  -movement_speed, movement_time, Stop.HOLD, False)
     right_motor.run_time( -movement_speed, movement_time, Stop.HOLD, True)
 
+def execute_path(instructions):
+    for instruction in instructions:
+        if   instruction == 1:
+            move_forward()
+        elif instruction == 2:
+            move_backward()
+        elif instruction == 3:
+            turn_left()
+        elif instruction == 4:
+            turn_right()
+
 ##########################
 ### PATH ACTUALIZATION ###
 ##########################
 
+# beep to indicate start of run
 ev3.speaker.beep(1000)
 
-# Instructions:
-# 1 = go forward
-# 2 = go backward
-# 3 = turn left
-# 4 = turn right
+# follow the found path
+execute_path(instructions)
 
-# Using run_time
-for instruction in instructions:
-    if   instruction == 1:
-        move_forward()
-    elif instruction == 2:
-        move_backward()
-    elif instruction == 3:
-        turn_left()
-    elif instruction == 4:
-        turn_right()
-
+# beep to indicate end of run
 ev3.speaker.beep(1000)

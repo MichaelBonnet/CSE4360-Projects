@@ -1,9 +1,29 @@
-import math as math
+# Authors : Michael Bonnet
+#           Allison Gardiner
+#           Noah Walker
+# Class   : CSE 4360-001 Autonomous Robots @ UT Arlington
+#           Taught by Dr. Manfred Huber in Fall 2021
+# Project : Project 1
+
+# Due Date           : 11/3/2021 @ 11:59 PM
+# Submission Date    : TBD
+# Demonstration Date : 11/3/2021 @ 7:15 PM
+# Grade Received     : TBD
 
 # This file exists for defining the facts of the workspace, goals, etc.
 # Change these variables to change what happens in a_star.py and main.py to figure out a path.
 
-d_version = 1
+###############
+### IMPORTS ###
+###############
+
+import math as math
+
+#############
+### SPECS ###
+#############
+
+d_version = 0
 
 # To help visualize the workspace.
 # 0 = empty cell

@@ -1,5 +1,17 @@
 #!/usr/bin/env pybricks-micropython
 
+# Authors : Michael Bonnet
+#           Allison Gardiner
+#           Noah Walker
+# Class   : CSE 4360-001 Autonomous Robots @ UT Arlington
+#           Taught by Dr. Manfred Huber in Fall 2021
+# Project : Project 1
+
+# Due Date           : 11/3/2021 @ 11:59 PM
+# Submission Date    : TBD
+# Demonstration Date : 11/3/2021 @ 7:15 PM
+# Grade Received     : TBD
+
 ###############
 ### IMPORTS ###
 ###############

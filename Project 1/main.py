@@ -16,13 +16,14 @@
 ### IMPORTS ###
 ###############
 
-from pybricks.hubs import EV3Brick
+# pybricks imports for the ev3, motors, ports, and Stop
+from pybricks.hubs       import EV3Brick
 from pybricks.ev3devices import Motor
-from pybricks.parameters import Port
-from pybricks.tools import print, wait
-from pybricks.parameters import Stop
+from pybricks.parameters import Port, Stop
 
-from a_star import *
+# imports from other files in folder
+from a_star          import *  # includes specification.py
+from extra_functions import *
 
 #######################
 ### INITIALIZATIONS ###
@@ -35,35 +36,32 @@ ev3 = EV3Brick()
 left_motor  = Motor(Port.B)
 right_motor = Motor(Port.C)
 
-wheel_diameter = wheel_diameter
-axle_track     = axle_track
+# defining variables for turning and moving
+movement_speed = total_degrees_per_foot
+movement_time  = 1350
 
-# defining TURN and MOVE variables
-MOVE_SPEED = total_degrees_per_foot
-MOVE_TIME  = 1350
-
-TURN_SPEED = MOVE_SPEED/2
-TURN_TIME  = 875
+turning_speed = movement_speed/2
+turning_time  = 875
 
 #########################
 ### CONTROL FUNCTIONS ###
 #########################
 
 def turn_right():
-    left_motor.run_time(  -TURN_SPEED, TURN_TIME, Stop.HOLD, False)
-    right_motor.run_time(  TURN_SPEED, TURN_TIME, Stop.HOLD, True)
+    left_motor.run_time(  -turning_speed, turning_time,   Stop.HOLD, False)
+    right_motor.run_time(  turning_speed, turning_time,   Stop.HOLD, True)
 
 def turn_left():
-    left_motor.run_time(   TURN_SPEED, TURN_TIME, Stop.HOLD, False)
-    right_motor.run_time( -TURN_SPEED, TURN_TIME, Stop.HOLD, True)
+    left_motor.run_time(   turning_speed, turning_time,   Stop.HOLD, False)
+    right_motor.run_time( -turning_speed, turning_time,   Stop.HOLD, True)
 
 def move_forward():
-    left_motor.run_time(   MOVE_SPEED, MOVE_TIME, Stop.HOLD, False)
-    right_motor.run_time(  MOVE_SPEED, MOVE_TIME, Stop.HOLD, True)
+    left_motor.run_time(   movement_speed, movement_time, Stop.HOLD, False)
+    right_motor.run_time(  movement_speed, movement_time, Stop.HOLD, True)
 
 def move_backward():
-    left_motor.run_time(  -MOVE_SPEED, MOVE_TIME, Stop.HOLD, False)
-    right_motor.run_time( -MOVE_SPEED, MOVE_TIME, Stop.HOLD, True)
+    left_motor.run_time(  -movement_speed, movement_time, Stop.HOLD, False)
+    right_motor.run_time( -movement_speed, movement_time, Stop.HOLD, True)
 
 ##########################
 ### PATH ACTUALIZATION ###

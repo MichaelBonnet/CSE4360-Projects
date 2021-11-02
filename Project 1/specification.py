@@ -25,6 +25,12 @@ import math as math
 
 d_version = 0
 
+# parameters for wheel stuff
+wheel_diameter          = 69
+wheel_circumference     = wheel_diameter * math.pi
+circumferences_per_foot = 305 / wheel_circumference
+total_degrees_per_foot  = circumferences_per_foot * 360  
+
 # To help visualize the workspace.
 # 0 = empty cell
 # X = obstacle cell
@@ -95,13 +101,7 @@ grid_obstacles = [
                  # Obstacle 23 - MxN
                  # Obstacle 24 - MxN
                  # Obstacle 25 - MxN
-]
-
-wheel_diameter          = 69
-wheel_circumference     = wheel_diameter * math.pi
-circumferences_per_foot = 305 / wheel_circumference
-total_degrees_per_foot  = circumferences_per_foot * 360   
-axle_track              = 102
+] 
 
 #####################
 ### 32x20 version ###
@@ -199,9 +199,3 @@ grid_obstacles_d = [
                     # Obstacle 24 - MxN
                     # Obstacle 25 - MxN
 ]
-
-wheel_diameter_d          = 69
-wheel_circumference_d     = wheel_diameter * math.pi
-circumferences_per_foot_d = 305 / wheel_circumference
-total_degrees_per_foot_d  = circumferences_per_foot * 360   
-axle_track_d              = 102

@@ -7,8 +7,8 @@
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import Motor
 from pybricks.parameters import Port
-from pybricks.tools import print, wait, StopWatch
-from pybricks.robotics import DriveBase
+from pybricks.tools import print, wait
+from pybricks.parameters import Stop
 
 from a_star import *
 
@@ -23,31 +23,35 @@ ev3 = EV3Brick()
 left_motor  = Motor(Port.B)
 right_motor = Motor(Port.C)
 
-wheel_diameter = 69
-axle_track     = 102
+wheel_diameter = wheel_diameter
+axle_track     = axle_track
 
-robot = DriveBase(left_motor, right_motor, wheel_diameter, axle_track)
+# defining TURN and MOVE variables
+MOVE_SPEED = total_degrees_per_foot
+MOVE_TIME  = 1350
 
-# Defining adjusted degrees for turns
-right_90 =  118
-left_90  = -118
+TURN_SPEED = MOVE_SPEED/2
+TURN_TIME  = 875
 
-###################
-### PATHFINDING ###
-###################
+#########################
+### CONTROL FUNCTIONS ###
+#########################
 
-start         = start_location
-goal          = goal_location
-robot_heading = initial_heading
+def turn_right():
+    left_motor.run_time(  -TURN_SPEED, TURN_TIME, Stop.HOLD, False)
+    right_motor.run_time(  TURN_SPEED, TURN_TIME, Stop.HOLD, True)
 
-workspace = generate_workspace(grid_columns, grid_rows, grid_obstacles, possible_locations)
-came_from, cost_so_far = a_star_search(workspace, start, goal)
+def turn_left():
+    left_motor.run_time(   TURN_SPEED, TURN_TIME, Stop.HOLD, False)
+    right_motor.run_time( -TURN_SPEED, TURN_TIME, Stop.HOLD, True)
 
-found_path       = reconstruct_path(came_from, start=start, goal=goal)
-step_transitions = get_step_transitions(found_path)
-instructions     = get_instructions(step_transitions)
+def move_forward():
+    left_motor.run_time(   MOVE_SPEED, MOVE_TIME, Stop.HOLD, False)
+    right_motor.run_time(  MOVE_SPEED, MOVE_TIME, Stop.HOLD, True)
 
-draw_grid(grid_columns, grid_rows, grid_obstacles, found_path)
+def move_backward():
+    left_motor.run_time(  -MOVE_SPEED, MOVE_TIME, Stop.HOLD, False)
+    right_motor.run_time( -MOVE_SPEED, MOVE_TIME, Stop.HOLD, True)
 
 ##########################
 ### PATH ACTUALIZATION ###
@@ -60,14 +64,16 @@ ev3.speaker.beep(1000)
 # 2 = go backward
 # 3 = turn left
 # 4 = turn right
+
+# Using run_time
 for instruction in instructions:
     if   instruction == 1:
-        robot.straight(305)
+        move_forward()
     elif instruction == 2:
-        robot.straight(-305)
+        move_backward()
     elif instruction == 3:
-        robot.turn(left_90)
+        turn_left()
     elif instruction == 4:
-        robot.turn(right_90)
+        turn_right()
 
 ev3.speaker.beep(1000)

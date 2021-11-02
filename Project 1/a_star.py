@@ -2,7 +2,7 @@
 ### IMPORTS ###
 ###############
 
-import math as math
+# import math as math
 
 from implementation import *
 from specification import *
@@ -139,18 +139,73 @@ def heading_change_detection(step_transitions, robot_heading):
 ### FOR TESTING a_star.py BY ITSELF ###
 #######################################
 
-# start         = start_location
-# goal          = goal_location
-# robot_heading = initial_heading
+if d_version == 1: # 16x10 version
+    start          = start_location
+    goal           = goal_location
+    robot_heading  = initial_heading
 
-# workspace = generate_workspace(grid_columns, grid_rows, grid_obstacles, possible_locations)
-# came_from, cost_so_far = a_star_search(workspace, start, goal)
+    workspace = generate_workspace(grid_columns, grid_rows, grid_obstacles, possible_locations)
+    came_from, cost_so_far = a_star_search(workspace, start, goal)
 
-# found_path       = reconstruct_path(came_from, start=start, goal=goal)
-# step_transitions = get_step_transitions(found_path)
-# instructions     = get_instructions(step_transitions)
+    found_path       = reconstruct_path(came_from, start=start, goal=goal)
+    step_transitions = get_step_transitions(found_path)
+    instructions     = get_instructions(step_transitions)
 
-# draw_grid(grid_columns, grid_rows, grid_obstacles, found_path)
+    draw_grid(grid_columns, grid_rows, grid_obstacles, found_path)
+elif d_version == 2: # 32 x 20 version
+    start            = start_location_d
+    goal             = goal_location_d
+    robot_heading    = initial_heading
+
+    workspace = generate_workspace(grid_columns_d, grid_rows_d, grid_obstacles_d, possible_locations_d)
+    came_from, cost_so_far = a_star_search(workspace, start, goal)
+
+    found_path       = reconstruct_path(came_from, start=start, goal=goal)
+    step_transitions = get_step_transitions(found_path)
+    instructions     = get_instructions(step_transitions)
+
+    draw_grid(grid_columns_d, grid_rows_d, grid_obstacles_d, found_path)
+elif d_version == 0: # testing both
+    # 16x10 version
+    start          = start_location
+    goal           = goal_location
+    robot_heading  = initial_heading
+
+    workspace = generate_workspace(grid_columns, grid_rows, grid_obstacles, possible_locations)
+    came_from, cost_so_far = a_star_search(workspace, start, goal)
+
+    found_path       = reconstruct_path(came_from, start=start, goal=goal)
+    step_transitions = get_step_transitions(found_path)
+    instructions     = get_instructions(step_transitions)
+
+    draw_grid(grid_columns, grid_rows, grid_obstacles, found_path)
+    
+    # 32 x 20 version
+    start            = start_location_d
+    goal             = goal_location_d
+    robot_heading    = initial_heading
+
+    workspace = generate_workspace(grid_columns_d, grid_rows_d, grid_obstacles_d, possible_locations_d)
+    came_from, cost_so_far = a_star_search(workspace, start, goal)
+
+    found_path       = reconstruct_path(came_from, start=start, goal=goal)
+    step_transitions = get_step_transitions(found_path)
+    instructions     = get_instructions(step_transitions)
+
+    draw_grid(grid_columns_d, grid_rows_d, grid_obstacles_d, found_path)
+elif d_version == 3: # move forward 4 feet
+    instructions = [1, 1, 1, 1] 
+elif d_version == 4: # move forward 2 feet, turn left, move forward two feet
+    instructions = [1, 1, 3, 1, 1] 
+elif d_version == 5: # move forward 2 feet, turn right, move forward two feet
+    instructions = [1, 1, 4, 1, 1] 
+elif d_version == 6: # move forward 2 feet, turn left, move forward two feet, turn right, move forward two feet
+    instructions = [1, 1, 3, 1, 1, 4, 1, 1]
+elif d_version == 7: # turn left in a full circle
+    instructions = [3, 3, 3, 3]
+elif d_version == 8: # move forward 2 feet, do a left 180, move forward 2 feet
+    instructions = [1, 1, 3, 3, 1, 1]
+
 
 
 

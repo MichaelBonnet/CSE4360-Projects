@@ -1,2 +1,0 @@
-1) Test with unfindable paths
-2) Test with different kinds of paths

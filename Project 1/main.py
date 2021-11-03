@@ -56,7 +56,7 @@ def turn_left():
     right_motor.run_time( -turning_speed,  turning_time,  Stop.HOLD, True)
 
 def move_forward():
-    left_motor.run_time(   movement_speed, movement_time, Stop.HOLD, False)
+    left_motor.run_time(   movement_speed+20, movement_time, Stop.HOLD, False)
     right_motor.run_time(  movement_speed, movement_time, Stop.HOLD, True)
 
 def move_backward():
@@ -66,13 +66,17 @@ def move_backward():
 def execute_path(instructions):
     for instruction in instructions:
         if   instruction == 1:
+            print("moving forward")
             move_forward()
         elif instruction == 2:
+            print("moving backward")
             move_backward()
         elif instruction == 3:
-            turn_left()
-        elif instruction == 4:
+            print("turning right")
             turn_right()
+        elif instruction == 4:
+            print("turning left")
+            turn_left()
 
 ##########################
 ### PATH ACTUALIZATION ###

@@ -27,11 +27,14 @@ import math as math
 import heapq
 
 from specification import *
+from extra_functions import *
 
 #################
 ### FUNCTIONS ###
 #################
 
+
+# Class for the code representation of the robot's workspace
 class Workspace:
     def __init__(self, width: int, height: int):
         self.width = width
@@ -57,6 +60,7 @@ class Workspace:
         results = filter(self.passable, results)
         return results
 
+
 # priority queue object for all the different searches
 # used in a_star_search
 class PriorityQueue:
@@ -72,6 +76,7 @@ class PriorityQueue:
     def get(self):
         return heapq.heappop(self.elements)[1]
 
+
 # rebuilds the path found by a_star_search() as an ordered list of positions 
 def reconstruct_path(came_from, start, goal):
     current = goal
@@ -83,11 +88,13 @@ def reconstruct_path(came_from, start, goal):
     path.reverse()     # optional
     return path
 
+
 # manhattan distance heuristic
 def manhattan_heuristic(a, b) -> float:
     (x1, y1) = a
     (x2, y2) = b
     return abs(x1 - x2) + abs(y1 - y2)
+
 
 # pathfinding with A*, using manhattan distance heuristic
 def a_star_search(graph, start, goal):
@@ -114,15 +121,18 @@ def a_star_search(graph, start, goal):
     
     return came_from, cost_so_far
 
+
 # Draws the workspace grid with obstacles and path
 def draw_workspace(grid_columns, grid_rows, grid_obstacles, found_path):
     grid_list = []
+    grid_list_2 = []
     grid_print = ""
     item_count = 0
+    temp = ""
 
     print("___" * grid_columns)
-    for y in range(grid_rows):
-        for x in range(grid_columns):
+    for x in range(grid_rows):
+        for y in range(grid_columns):
             if (x, y) in found_path:
                 grid_list.append(" @ ")
                 item_count += 1
@@ -136,15 +146,27 @@ def draw_workspace(grid_columns, grid_rows, grid_obstacles, found_path):
             if item_count == grid_columns:
                 grid_list.append("\n")
                 item_count = 0
+
+                for string in grid_list:
+                    temp += string
+
+                grid_list_2.insert(0, temp)
+                temp=""
+                grid_list[:]=[]
     
-    for string in grid_list:
-        grid_print += string
+    grid_list_2.reverse()
+    for string in grid_list_2:
+        temp = string
+        grid_print = temp + grid_print
+
     print(grid_print)
-    print("~~~" * grid_columns)
+    print("---" * grid_columns)
+
 
 # generates and returns a workspace divided into 1' x 1' cells with obstacles marked
 def generate_workspace(grid_columns, grid_rows, grid_obstacles, possible_locations):
-    workspace         = Workspace(grid_columns, grid_rows)
+    # workspace         = Workspace(grid_columns, grid_rows)
+    workspace         = Workspace(grid_rows, grid_columns)
     workspace.weights = {loc: 5        for loc in possible_locations}
     workspace.weights = {loc: 10000000 for loc in grid_obstacles}
 
@@ -181,23 +203,23 @@ def get_instructions(step_transitions):
     # for each transition,
     for i in range(len(step_transitions)):
         # detect if there was a heading change
-        if step_transitions[i][0] != step_transitions[i-1][0] and step_transitions[i][1] != step_transitions[i-1][1]:
+        if step_transitions[i][0] != step_transitions[i-1][0] and step_transitions[i][1] != step_transitions[i-1][1] and i>0:
             # and if so, what kind of heading change
             x_change  = step_transitions[i][0] - step_transitions[i-1][0]
             y_change  = step_transitions[i][1] - step_transitions[i-1][1]
 
             # Depending on the heading change,
             if y_change == 1:
-                instructions.append(4)  # append right turn instruction
+                instructions.append(3)  # append right turn instruction
                 instructions.append(1)  # append go forward instruction
             elif y_change == -1:
-                instructions.append(3)  # append left turn  instruction
+                instructions.append(4)  # append left turn  instruction
                 instructions.append(1)  # append go forward instruction
             elif x_change == 1:
-                instructions.append(3)  # append left turn  instruction
+                instructions.append(4)  # append left turn  instruction
                 instructions.append(1)  # append go forward instruction
             elif x_change == -1:
-                instructions.append(4)  # append right turn instruction
+                instructions.append(3)  # append right turn instruction
                 instructions.append(1)  # append go forward instruction
         # if no heading change is detected,
         else:
@@ -211,35 +233,7 @@ def get_instructions(step_transitions):
 ### FOR TESTING a_star.py BY ITSELF ###
 #######################################
 
-if d_version == 0: # testing both
-    # 16x10 version
-    start          = start_location
-    goal           = goal_location
-    robot_heading  = initial_heading
-
-    workspace = generate_workspace(grid_columns, grid_rows, grid_obstacles, possible_locations)
-    came_from, cost_so_far = a_star_search(workspace, start, goal)
-
-    found_path       = reconstruct_path(came_from, start=start, goal=goal)
-    step_transitions = get_step_transitions(found_path)
-    instructions     = get_instructions(step_transitions)
-
-    draw_workspace(grid_columns, grid_rows, grid_obstacles, found_path)
-    
-    # 32 x 20 version
-    start            = start_location_d
-    goal             = goal_location_d
-    robot_heading    = initial_heading
-
-    workspace = generate_workspace(grid_columns_d, grid_rows_d, grid_obstacles_d, possible_locations_d)
-    came_from, cost_so_far = a_star_search(workspace, start, goal)
-
-    found_path       = reconstruct_path(came_from, start=start, goal=goal)
-    step_transitions = get_step_transitions(found_path)
-    instructions     = get_instructions(step_transitions)
-
-    draw_workspace(grid_columns_d, grid_rows_d, grid_obstacles_d, found_path)
-elif d_version == 1: # 16x10 version
+if d_version == 1: # 16x10 version
     start          = start_location
     goal           = goal_location
     robot_heading  = initial_heading
@@ -265,20 +259,6 @@ elif d_version == 2: # 32 x 20 version
     instructions     = get_instructions(step_transitions)
 
     draw_workspace(grid_columns_d, grid_rows_d, grid_obstacles_d, found_path)
-elif d_version == 3: # move forward 4 feet
-    instructions = [1, 1, 1, 1] 
-elif d_version == 4: # move forward 2 feet, turn left, move forward two feet
-    instructions = [1, 1, 3, 1, 1] 
-elif d_version == 5: # move forward 2 feet, turn right, move forward two feet
-    instructions = [1, 1, 4, 1, 1] 
-elif d_version == 6: # move forward 2 feet, turn left, move forward two feet, turn right, move forward two feet
-    instructions = [1, 1, 3, 1, 1, 4, 1, 1]
-elif d_version == 7: # turn left in a full circle
-    instructions = [3, 3, 3, 3]
-elif d_version == 8: # move forward 2 feet, do a left 180, move forward 2 feet
-    instructions = [1, 1, 3, 3, 1, 1]
-else:
-    pass
 
 
 

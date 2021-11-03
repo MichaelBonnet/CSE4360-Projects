@@ -23,7 +23,7 @@ import math as math
 ### SPECS ###
 #############
 
-d_version = 0
+d_version = 1
 
 # parameters for wheel stuff
 wheel_diameter          = 69
@@ -54,16 +54,30 @@ total_degrees_per_foot  = circumferences_per_foot * 360
 #         [X, X, X, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 # ]
 
-start_location = (0,  5)
-goal_location  = (12, 4)
+# start_location = (0,  5)
+# goal_location  = (12, 4)
+
+# start_location = (0,  4)
+# goal_location  = (12, 5)
+
+start_location = (4,  0)
+goal_location  = (5, 12)
 
 grid_columns   = 16
 grid_rows      = 10
 
 possible_locations = []
-for j in range(grid_columns):
-    for i in range(grid_rows):
-        possible_locations.append((j, i))
+for i in range(grid_rows):
+    for j in range(grid_columns):
+        possible_locations.append((i, j))
+
+# for location in possible_locations:
+#     print(location)
+
+# possible_locations = []
+# for j in range(grid_rows):
+#     for i in range(grid_columns):
+#         possible_locations.append((j, i))
 
 # Headings:
 # North (+Y) = 1
@@ -72,15 +86,31 @@ for j in range(grid_columns):
 # West  (-X) = 4
 grid_obstacles = [
                  # Obstacle 1 - 3x2
-                 (1, 1), (2, 1), (1, 2), (2, 2), (3, 1), (3, 2),
+                 (7, 1), (7, 2), (7, 3), (6, 1), (6, 2), (6, 3),
                  # Obstacle 2 - 3x3
-                 (0, 7), (1, 7), (2, 7), (0, 8), (1, 8), (2, 8), (0, 9), (1, 9), (2, 9),
+                 (0, 0), (0, 1), (0, 2), 
+                 (1, 0), (1, 1), (1, 2),
+                 (2, 0), (2, 1), (2, 2),
                  # Obstacle 3 - 2x4
-                 (5, 3), (6, 3), (5, 4), (6, 4), (5, 5), (6, 5), (5, 6), (6, 6),
+                 (3, 5), (3, 6),
+                 (4, 5), (4, 6),
+                 (5, 5), (5, 6),
+                 (6, 5), (6, 6),
                  # Obstacle 4 - 2x2
-                 (8, 3), (9, 3), (8, 4), (9, 4),
+                 (5, 9), (5, 10),
+                 (6, 9), (6, 10),
                  # Obstacle 5 - 1x1
-                 (5, 0),
+                 (9, 7),
+                #  # Obstacle 1 - 3x2
+                #  (1, 1), (2, 1), (1, 2), (2, 2), (3, 1), (3, 2),
+                #  # Obstacle 2 - 3x3
+                #  (0, 7), (1, 7), (2, 7), (0, 8), (1, 8), (2, 8), (0, 9), (1, 9), (2, 9),
+                #  # Obstacle 3 - 2x4
+                #  (5, 3), (6, 3), (5, 4), (6, 4), (5, 5), (6, 5), (5, 6), (6, 6),
+                #  # Obstacle 4 - 2x2
+                #  (8, 3), (9, 3), (8, 4), (9, 4),
+                #  # Obstacle 5 - 1x1
+                #  (5, 0),
                  # Obstacle 6 - MxN
                  # Obstacle 7 - MxN
                  # Obstacle 8 - MxN

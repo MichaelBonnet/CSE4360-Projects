@@ -1,4 +1,3 @@
 1) Add drift adjustments
 2) Test with unfindable paths
 3) Test with different kinds of paths
-4) Rewrite a_star.py to have origin at bottom left corner rather than top left

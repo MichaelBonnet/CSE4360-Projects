@@ -24,7 +24,7 @@
 ###############
 
 import math as math
-import heapq
+import heapq # for priority queue
 
 from specification import *
 from extra_functions import *
@@ -168,8 +168,9 @@ def generate_workspace(grid_columns, grid_rows, grid_obstacles, possible_locatio
     # workspace         = Workspace(grid_columns, grid_rows)
     workspace         = Workspace(grid_rows, grid_columns)
     workspace.weights = {loc: 5        for loc in possible_locations}
-    workspace.weights = {loc: 10000000 for loc in grid_obstacles}
-
+    workspace.weights = {loc: 10000000 for loc in grid_obstacles}      # this would be math.inf,
+                                                                       # but MicroPython's math library version
+                                                                       # doesn't have it.
     # return the newly generated workspace
     return workspace
 
@@ -182,7 +183,7 @@ def get_step_transitions(found_path):
     for i in range(len(found_path)-1):
         x_change  = found_path[i+1][0] - found_path[i][0] # get change in X for next transition
         y_change  = found_path[i+1][1] - found_path[i][1] # get change in Y for next transition
-        xy_change = [x_change, y_change]                  # create temp list, 0th item = X change, 1st item = Y change
+        xy_change = [y_change, x_change]                  # create temp list, 0th item = X change, 1st item = Y change
         step_transitions.append(xy_change)                # append temp list to the list of all step transitions
 
     # return the transitions list
@@ -210,17 +211,25 @@ def get_instructions(step_transitions):
 
             # Depending on the heading change,
             if y_change == 1:
-                instructions.append(3)  # append right turn instruction
                 instructions.append(1)  # append go forward instruction
+                instructions.append(4)  # append right turn instruction
+                instructions.append(1)  # append go forward instruction
+                
             elif y_change == -1:
-                instructions.append(4)  # append left turn  instruction
                 instructions.append(1)  # append go forward instruction
+                instructions.append(3)  # append left turn  instruction
+                instructions.append(1)  # append go forward instruction
+                
             elif x_change == 1:
+                instructions.append(1)  # append go forward instruction
                 instructions.append(4)  # append left turn  instruction
                 instructions.append(1)  # append go forward instruction
+                
             elif x_change == -1:
+                instructions.append(1)  # append go forward instruction
                 instructions.append(3)  # append right turn instruction
                 instructions.append(1)  # append go forward instruction
+                
         # if no heading change is detected,
         else:
             instructions.append(1) # just go forward on current heading
@@ -258,6 +267,9 @@ elif d_version == 2: # 32 x 20 version
     step_transitions = get_step_transitions(found_path)
     instructions     = get_instructions(step_transitions)
 
+    for transition in step_transitions:
+        print(transition)
+    print_instructions(instructions)
     draw_workspace(grid_columns, grid_rows, grid_obstacles_d, found_path)
 
 

@@ -23,9 +23,9 @@ def print_instructions(instructions):
         elif instructions[i] == 2:
             instruction_text = "go    backward"
         elif instructions[i] == 3:
-            instruction_text = "turn  left"
-        elif instructions[i] == 4:
             instruction_text = "turn  right"
+        elif instructions[i] == 4:
+            instruction_text = "turn  left"
 
         print("Instruction " + str(i) + ":\t" + str(instructions[i]) + " ("+str(instruction_text)+")")
 

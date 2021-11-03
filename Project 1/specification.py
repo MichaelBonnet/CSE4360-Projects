@@ -23,6 +23,8 @@ import math as math
 ### SPECS ###
 #############
 
+# 1 = 16x10, 1 foot/12 inch resolution
+# 2 = 32x20, 0.5 foot/6 inch resolution
 d_version = 2
 
 # parameters for wheel stuff
@@ -37,6 +39,7 @@ if d_version == 2:
     circumferences_per_foot = 305 / wheel_circumference
     total_degrees_per_foot  = (circumferences_per_foot * 360)/2
 
+# parameters for workspace
 if d_version == 1:
     grid_columns     = 16
     grid_rows        = 10

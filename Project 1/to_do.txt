@@ -1,3 +1,2 @@
-1) Add drift adjustments
-2) Test with unfindable paths
-3) Test with different kinds of paths
+1) Test with unfindable paths
+2) Test with different kinds of paths

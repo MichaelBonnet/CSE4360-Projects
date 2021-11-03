@@ -251,14 +251,14 @@ elif d_version == 2: # 32 x 20 version
     goal             = goal_location_d
     robot_heading    = initial_heading
 
-    workspace = generate_workspace(grid_columns_d, grid_rows_d, grid_obstacles_d, possible_locations_d)
+    workspace = generate_workspace(grid_columns, grid_rows, grid_obstacles_d, possible_locations)
     came_from, cost_so_far = a_star_search(workspace, start, goal)
 
     found_path       = reconstruct_path(came_from, start=start, goal=goal)
     step_transitions = get_step_transitions(found_path)
     instructions     = get_instructions(step_transitions)
 
-    draw_workspace(grid_columns_d, grid_rows_d, grid_obstacles_d, found_path)
+    draw_workspace(grid_columns, grid_rows, grid_obstacles_d, found_path)
 
 
 

@@ -40,28 +40,37 @@ right_motor = Motor(Port.C)
 movement_speed = total_degrees_per_foot
 movement_time  = 1350
 
-turning_speed  = movement_speed/2
-turning_time   = 875
+if d_version == 1:
+    turning_speed  = total_degrees_per_foot/2
+    turning_time   = 875
+    movement_time  = 1350
+elif d_version == 2:
+    turning_speed  = total_degrees_per_foot/2
+    turning_time   = 700*2
+    # turning_time   = 747*2
+    movement_time  = 1175
 
 #########################
 ### CONTROL FUNCTIONS ###
 #########################
 
-def turn_right():
+def turn_left():
     left_motor.run_time(  -turning_speed,  turning_time,  Stop.HOLD, False)
+    # right_motor.run_time(  turning_speed+4,  turning_time,  Stop.HOLD, True)
     right_motor.run_time(  turning_speed,  turning_time,  Stop.HOLD, True)
 
-def turn_left():
+def turn_right():
     left_motor.run_time(   turning_speed,  turning_time,  Stop.HOLD, False)
-    right_motor.run_time( -turning_speed,  turning_time,  Stop.HOLD, True)
+    # right_motor.run_time( -turning_speed-4,  turning_time,  Stop.HOLD, True)
+    right_motor.run_time( -turning_speed-4,  turning_time,  Stop.HOLD, True)
 
 def move_forward():
-    left_motor.run_time(   movement_speed+20, movement_time, Stop.HOLD, False)
-    right_motor.run_time(  movement_speed, movement_time, Stop.HOLD, True)
+    left_motor.run_time(   movement_speed, movement_time, Stop.HOLD, False)
+    right_motor.run_time(  movement_speed,    movement_time, Stop.HOLD, True)
 
 def move_backward():
     left_motor.run_time(  -movement_speed, movement_time, Stop.HOLD, False)
-    right_motor.run_time( -movement_speed, movement_time, Stop.HOLD, True)
+    right_motor.run_time( -movement_speed,    movement_time, Stop.HOLD, True)
 
 def execute_path(instructions):
     for instruction in instructions:
@@ -86,7 +95,18 @@ def execute_path(instructions):
 ev3.speaker.beep(1000)
 
 # follow the found path
-execute_path(instructions)
+# execute_path(instructions)
+
+# move_forward()
+# move_forward()
+# move_forward()
+# move_forward()
+
+turn_right()
+# turn_left()
+# turn_left() # little too far
+# turn_right()
+
 
 # beep to indicate end of run
 ev3.speaker.beep(1000)

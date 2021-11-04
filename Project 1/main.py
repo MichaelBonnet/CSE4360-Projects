@@ -67,7 +67,7 @@ def turn_left():
 def turn_right():
     left_motor.run_time(   turning_speed,  turning_time,  Stop.HOLD, False)
     # right_motor.run_time( -turning_speed,  turning_time,  Stop.HOLD, True)
-    right_motor.run_time( -turning_speed-4,  turning_time,  Stop.HOLD, True)
+    right_motor.run_time( -turning_speed-8,  turning_time,  Stop.HOLD, True)
 
 # Moves ev3 forward wrt current heading by either 6 or 12 inches
 def move_forward():

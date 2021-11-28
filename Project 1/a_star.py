@@ -1,4 +1,4 @@
-# Authors : Michael Bonnet
+# Authors : Michael Bonnet 
 #           Allison Gardiner
 #           Noah Walker
 # Class   : CSE 4360-001 Autonomous Robots @ UT Arlington

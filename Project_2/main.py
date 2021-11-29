@@ -70,7 +70,7 @@ def wall_found():
 
 def goal_found():
     if us.distance():
-        if us.distance() < 400:
+        if us.distance() < 330:
             return True
         else:
             return False
@@ -93,10 +93,10 @@ def follow_wall():
             left_motor.run(100)
             right_motor.stop()
             wait(50)
-        if wall_found():
-            while wall_found():
-                right_motor.run(-200)
-            right_motor.stop()
+            if wall_found():
+                while wall_found():
+                    right_motor.run(-200)
+                right_motor.stop()
         else:
             right_motor.run(100)
             left_motor.stop()

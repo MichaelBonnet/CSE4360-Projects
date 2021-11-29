@@ -123,6 +123,7 @@ def clear():
     wait(200)
 
     while ( (wall_found() == False) & (kill_counter < 40) ):
+        ev3.speaker.beep()
         left_motor.run(200)
         right_motor.run(200)
         wait(200)
@@ -134,7 +135,7 @@ def clear():
     
     if wall_found():
         stop_robot()
-        ev3.speaker.say("Found Wall While In Kill Mode")
+        ev3.speaker.say("Found Wall While In Clear Mode")
         print(cs.color())
         follow_wall()
 

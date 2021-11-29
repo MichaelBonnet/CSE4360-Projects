@@ -52,56 +52,6 @@ turning_time            = 750*2
 movement_speed          = total_degrees_per_foot
 movement_time           = 1175
 
-#########################
-### CONTROL FUNCTIONS ###
-#########################
-
-# Turns ev3 in place to the left by 90 degrees
-def turn_left():
-    left_motor.run_time(  -turning_speed,  turning_time,  Stop.HOLD, False)
-    right_motor.run_time(  turning_speed,  turning_time,  Stop.HOLD, True)
-
-# Turns ev3 in place to the left by only a few degrees
-def turn_left_inc( divisor ):
-    left_motor.run_time(  -turning_speed,  ( turning_time / divisor ),  Stop.HOLD, False)
-    right_motor.run_time(  turning_speed,  ( turning_time / divisor ),  Stop.HOLD, True)
-
-# Turns ev3 in place to the right by 90 degrees
-def turn_right():
-    left_motor.run_time(   turning_speed,  turning_time,  Stop.HOLD, False)
-    # right_motor.run_time( -turning_speed,  turning_time,  Stop.HOLD, True)
-    right_motor.run_time( -turning_speed-8,  turning_time,  Stop.HOLD, True)
-
-# Turns ev3 in place to the right by only a few degrees
-def turn_right_inc( divisor ):
-    left_motor.run_time(   turning_speed,  ( turning_time / divisor ),  Stop.HOLD, False)
-    # right_motor.run_time( -turning_speed,  turning_time,  Stop.HOLD, True)
-    right_motor.run_time( -turning_speed-8,  ( turning_time / divisor ),  Stop.HOLD, True)
-
-# Moves ev3 forward wrt current heading by either 6 or 12 inches
-def move_forward():
-    left_motor.run_time(   movement_speed, movement_time, Stop.HOLD, False)
-    right_motor.run_time(  movement_speed,    movement_time, Stop.HOLD, True)
-
-# Moves ev3 forward wrt current heading by some fraction of 6 inches
-def move_forward_inc( divisor ):
-    left_motor.run_time(   movement_speed, ( movement_time / divisor ), Stop.HOLD, False)
-    right_motor.run_time(  movement_speed,    ( movement_time / divisor ), Stop.HOLD, True)
-
-# Moves ev3 backward wrt current heading by either 6 or 12 inches
-def move_backward():
-    left_motor.run_time(  -movement_speed, movement_time, Stop.HOLD, False)
-    right_motor.run_time( -movement_speed,    movement_time, Stop.HOLD, True)
-
-# Moves ev3 backward wrt current heading by either 6 or 12 inches
-def move_backward_inc( divisor ):
-    left_motor.run_time(  -movement_speed, ( movement_time / divisor ), Stop.HOLD, False)
-    right_motor.run_time( -movement_speed,    ( movement_time / divisor ), Stop.HOLD, True)
-
-def clockwise_circle_turn( right_turning_time, left_turning_time ):
-    left_motor.run_time(   turning_speed,  left_turning_time,  Stop.HOLD, False)
-    right_motor.run_time( -turning_speed-8,  right_turning_time,  Stop.HOLD, True)
-
 ##########################
 ### BEHAVIOR FUNCTIONS ###
 ##########################

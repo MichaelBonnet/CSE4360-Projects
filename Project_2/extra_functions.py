@@ -17,3 +17,21 @@ def check_color_sensor():
             print("BROWN")
         else:
             print("IMPROPER SENSING")
+
+def check_light_sensor(ls):
+    while True:
+        print(ls.reflection())
+        # elif ls.color() == Color.BLUE:
+        #     print("BLUE")
+        # elif ls.color() == Color.GREEN:
+        #     print("GREEN")
+        # elif ls.color() == Color.YELLOW:
+        #     print("YELLOW")
+        # elif ls.color() == Color.RED:
+        #     print("RED")
+        # elif ls.color() == Color.WHITE:
+        #     print("WHITE")
+        # elif ls.color() == Color.BROWN:
+        #     print("BROWN")
+        # else:
+        #     print("IMPROPER SENSING")

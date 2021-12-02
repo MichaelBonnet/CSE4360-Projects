@@ -265,7 +265,7 @@ ev3.speaker.say("Starting Run Now")
 # Start by wandering
 wander()
 
-# check_light_sensor(ls)
+# check_color_sensor(cs)
 
 # Announce run end
 ev3.speaker.say("Run Complete")

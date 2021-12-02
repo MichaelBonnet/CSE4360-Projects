@@ -1,5 +1,7 @@
+from pybricks.parameters import Port, Stop, Color
+
 # Prints the detected color to the console for color sensor debugging
-def check_color_sensor():
+def check_color_sensor(cs):
     while True:
         if cs.color() == Color.BLACK:
             print("BLACK")

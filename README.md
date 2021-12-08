@@ -2,11 +2,17 @@
 
 This repository contains the directories for the projects done by Michael Bonnet, Allison Gardiner, and Noah Walker for CSE 4360 Autonomous Robots, taught by Dr. Mangred Huber in the Fall 2021 semester at the University of Texas at Arlington.
 
-**Project_1** is the directory for our first assignment. We were tasked to design and program a LEGO EV3 robot to navigate a maze where the starting position, goal position, and obstacle (aka wall) positions were known. We were allowed to choose our orientation. However, once programming in these positions, the robot had to plan a path and execute it autonomously. See the specification document, `Project_1/proj1.pdf`, for more information.
+`Project_1`
+---
+
+**Project_1** is the directory for our first project. We were tasked to design and program a LEGO EV3 robot to navigate a maze where the starting position, goal position, and obstacle (aka wall) positions were known. We were allowed to choose our orientation. However, once programming in these positions, the robot had to plan a path and execute it autonomously. See the specification document, `Project_1/proj1.pdf`, for more information.
 
 We used A* search with a Manhattan Distance heuristic to build this path, then used the ordered position list to generate movement commands. See our report, `Project_1/CSE 4360 Team 6 Project 1 Report.pdf`, for more information.
 
-**Project_2** is the directory for our second assignment. We were tasked to design and program a LEGO EV3 robot to navigate a maze with the goal of finding an upright object somewhere in the maze, then moving that object 12 inches away from the position it was found in. However, unlike in our first project, none of the starting position, starting orientation, goal position, or obstacle positions were known, and our robot's actions were to be purely behavior-based, and again had to execute all its movements and actions autonomously. See the specification document, `Project_2/proj2.pdf`, for more information.
+`Project_2`
+---
+
+**Project_2** is the directory for our second project. We were tasked to design and program a LEGO EV3 robot to navigate a maze with the goal of finding an upright object somewhere in the maze, then moving that object 12 inches away from the position it was found in. However, unlike in our first project, none of the starting position, starting orientation, goal position, or obstacle positions were known, and our robot's actions were to be purely behavior-based, and again had to execute all its movements and actions autonomously. See the specification document, `Project_2/proj2.pdf`, for more information.
 
 Our robot possessed two sensors: a color sensor, and an ultrasonic sensor. 
 

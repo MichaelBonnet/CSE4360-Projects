@@ -10,6 +10,7 @@ from ev3dev2.sensor import INPUT_1, INPUT_2, INPUT_3, INPUT_4, Sensor
 from ev3dev2.sensor.lego import UltrasonicSensor
 from time import time, sleep
 from smbus import SMBus
+import sys
 from sys import stderr
 
 #############################
@@ -61,9 +62,9 @@ def get_speed_modifier(dist):
         return 4
     elif dist in range(250, 500):
         return 3
-    elif dist in range(100, 250):
+    elif dist in range(200, 250):
         return 2
-    elif dist in range(50, 100):
+    elif dist in range(150, 200):
         return 1
     else:
         return 0
@@ -126,11 +127,11 @@ def braitenburg_love(tank_pair, speed_modifier, ir_direction):
     if speed_modifier == 0:                # If the signal is close enough, stop to look lovingly into its eyes
         tank_pair.off()
     else:
-        if ir_direction in range(0, 5):    # If IR source is in 0-4 (behind, & left of center), turn right up gradient to head closer
+        if ir_direction in range(6, 10):    # If IR source is in 0-4 (behind, & left of center), turn right up gradient to head closer
             tank_pair.on_for_rotations(left_speed=(100 * (speed_modifier / 10)), right_speed=(70 * (speed_modifier / 10)), rotations=1)
         elif ir_direction == 5:            # If IR source is in 5 (center), no more turning necessary, start slowing down on approach
             tank_pair.on(left_speed=(70 * (speed_modifier / 10)), right_speed=(70 * (speed_modifier / 10)))
-        elif ir_direction in range(6, 10): # If IR source is in 6-9 (right of center), turn left down gradient to head closer
+        elif ir_direction in range(0, 5): # If IR source is in 6-9 (right of center), turn left down gradient to head closer
             tank_pair.on_for_rotations(left_speed=(70 * (speed_modifier / 10)), right_speed=(100 * (speed_modifier / 10)), rotations=1)
 
 
@@ -140,7 +141,7 @@ def braitenburg_love(tank_pair, speed_modifier, ir_direction):
 #   Stopping if there are no new "lights" to see
 def braitenburg_explore(tank_pair, speed_modifier, ir_direction):
     if ir_direction == 0:              # If IR source is behind: stop moving
-        tank_pair.off()
+        tank_pair.on(left_speed=(70 * (speed_modifier / 10)), right_speed=(70 * (speed_modifier / 10)))
     elif ir_direction in range(1, 6):  # If IR source is in 1-5 (left through center), turn left down gradient to head away
         tank_pair.on_for_rotations(left_speed=(70 * (speed_modifier / 10)), right_speed=(100 * (speed_modifier / 10)), rotations=1)
     elif ir_direction in range(6, 10): # If IR source is in 6-9 (right), turn right up gradient to head away
@@ -152,9 +153,10 @@ def braitenburg_explore(tank_pair, speed_modifier, ir_direction):
 ##############################
 
 while True:
+    
     # Sensor Reading Testing
     # print( get_speed_modifier(us.value()) )
-    print( get_ir_direction(bus), file=stderr )
+    # print( get_ir_direction(bus), end='\r', file=stderr )
 
     #############################################
     ### UNCOMMENT ONE BEHAVIOR PER BRAITENBUG ###

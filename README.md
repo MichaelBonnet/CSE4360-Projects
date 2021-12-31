@@ -41,14 +41,14 @@ For more information, see our report, `Project_2/CSE 4360 Team 6 Project 2 Repor
 
 **Project_3** is the directory for our second project. When our team received the specification document for Project 3 including several suggested projects, we did not find any of them to be quite to our liking, and so began brainstorming what we’d propose instead. Eventually, we settled on proposing that we design and implement Braitenberg vehicles, simple robots that directly map sensor readings to actuators in ways that create different behaviors based on whether the robots accelerate or decelerate towards signals, and turn towards or away from signals. Combinations of these two criterions’ two variations result in four behaviors:
 
-* “Fear”, where the robot will turn away from signal and accelerate the closer it is to the
+* **“Fear”**, where the robot will turn away from signal and accelerate the closer it is to the
 signal, aiming to come to a stop when it has turned fully away from the signal and no
 longer detects it, as if it “fears” the signal.
-* “Aggression”, where the robot will turn toward the signal and accelerate the closer it is to
+* **“Aggression”**, where the robot will turn toward the signal and accelerate the closer it is to
 the signal, as if it were trying to “attack” the signal.
-* “Love”, where the robot will turn toward the signal and decelerate the closer it is to the
+* **“Love”**, where the robot will turn toward the signal and decelerate the closer it is to the
 signal, as if it “loved” the signal and wished to be peacefully near to it and face it.
-* “Explore”, where the robot will turn away from the signal and decelerate the closer it is to
+* **“Explore”**, where the robot will turn away from the signal and decelerate the closer it is to
 the signal, as if it were “exploring” the world and wished to observe signals then seek
 new ones.
 
